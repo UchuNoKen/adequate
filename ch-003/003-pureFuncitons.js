@@ -34,7 +34,7 @@ xs.splice(0, 3); // []
 // Ex.
 
 // impure
-let minimum = 21;
+let minimum = 21; // depends on mutable variable
 
 let checkAge = function(age) {
   return age >= minimum;
@@ -44,4 +44,12 @@ let checkAge = function(age) {
 let checkAge = age => {
   let minimum = 21;
   return age >= minimum;
+};
+
+// pure with immutable minimum
+let checkAge = age => {
+  let immutableState = Object.freeze({
+    minimum: 21
+  });
+  return age >= immutableState.minimum;
 };
