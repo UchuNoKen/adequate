@@ -104,6 +104,8 @@ let getChildren = x => {
 
 let allChildren = map(getChildren); // from curried functions, not .map()
 
+allChildren();
+
 // ! Partial application: Giving a function fewer arguments than it expects
 
 // Exercises --------------------------------------------------------------------
