@@ -80,3 +80,22 @@ add(x, 0) === x;
 
 // distributive : 5 x (1 + 3) = (5 * 1) + (5 * 3)
 multiply(x, add(y, z)) === add(multiply(x, y), multiply(x, z));
+
+// --> Simplify the seagull app using the aforementioned properties
+
+// Original line
+add(multiply(flock_b, add(flock_a, flock_c)), multiply(flock_a, flock_b));
+
+// Apply the identity property to remove the extra add
+// (add(flock_a, flock_c) === flock_a)
+add(multiply(flock_b, flock_a), multiply(flock_a, flock_b));
+
+// Apply distributive property to achieve the result
+multiply(flock_b, add(flock_a, flock_a));
+
+// The functional approach makes for code that is:
+//      - easy to read
+//      - easy to test
+//      - easy to debug and maintain
+
+// This is better than the anything goes approach of imperative programming
