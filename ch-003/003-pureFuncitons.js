@@ -118,3 +118,42 @@ let pureHttpCall = memoize(function(url, params) {
 //   http call, rather it caches the generated function.
 
 // Takeaway that functions can be cached, no matter how destructive
+
+// Portable/ Self-Documenting ------------------------------------------------------
+
+// Pure functions are completely self-contained
+//  - this means the dependencies are explicit
+
+// impure
+let signUp = attrs => {
+  let user = saveUser(attrs);
+  welcomeUser(user);
+};
+
+let saveUser = attr => {
+  let user = Db.save(attrs);
+};
+
+let welcomeUser = user => {
+  //Email(user, ...);
+};
+
+// pure
+let signUp = function(Db, Email, attrs) {
+  return function() {
+    let user = saveUser(Db, attrs);
+    welcomeUser(Email, user);
+  };
+};
+
+let saveUser = function(Db, attrs) {
+  // ...
+};
+
+var welcomeUser = function(Email, user) {
+  //...
+};
+
+// signUp has a descriptive signature
+
+// Testable -------------------------------------------------------------------------
