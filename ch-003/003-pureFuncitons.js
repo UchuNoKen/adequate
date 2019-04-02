@@ -157,3 +157,49 @@ var welcomeUser = function(Email, user) {
 // signUp has a descriptive signature
 
 // Testable -------------------------------------------------------------------------
+
+// pure functions make testing easier
+
+// Reasonable -----------------------------------------------------------------------
+// equational reasoning: swapping 'equals for equals' to reason about code
+// Referential transparency: when code can be substituted for its evaluated value
+
+// Ex.
+
+let Immutable = require("immutable");
+
+let decrementHP = player => {
+  return player.set("hp", player.get("hp") - 1);
+};
+
+let isSameTeam = (player1, player2) => {
+  return player1.get("team") === player2.get("team");
+};
+
+let punch = (player, target) => {
+  //  return isSameTeam(player, target) ? target : decrementHP(target);
+  //  return player.get('team') === target.get('team') ? target : decrementHP(target);  // inline isSameTeam
+  //  return "red" === "green" ? target : decrementHP(target);     // replace teams with actual value
+  //  return decrementHP(target); //  remove entire if branch
+
+  return target.set("hp", target.get("hp") - 1); // inline decrement
+};
+
+let jobe = Immutable.Map({
+  name: "Jobe",
+  hp: 20,
+  team: "red"
+});
+let michael = Immutable.Map({
+  name: "Michael",
+  hp: 20,
+  team: "green"
+});
+
+punch(jobe, michael);
+
+// This ability to reason about code is terrific for refactoring and understanding code in
+// general.
+
+// we can run any pure function in parallel since it does not need access to shared memory
+// and it cannot, by definition, have a race condition due to some side effect.
