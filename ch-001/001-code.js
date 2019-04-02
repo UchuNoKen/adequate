@@ -55,3 +55,28 @@ let result = conjoin(breed(flock_b, conjoin(flock_a, flock_c)), breed(flock_a, f
 //    multiplication (breed).
 
 // --> Rename custom functions to 'multiply' and 'add'
+
+let add = (x, y) => x + y;
+let multiply = (x, y) => x * y;
+
+let flock_a = 4;
+let flock_b = 2;
+let flock_c = 0;
+
+let result = add(multiply(flock_b, add(flock_a, flock_c)), multiply(flock_a, flock_b));
+
+// => 16
+
+// ! Property knowledge
+
+// associative : (2 + 3) + 5 = 2 + (3 + 5)
+add(add(x, y), z) === add(x, add(y, z));
+
+// commutative : 5 + 1 = 1 + 5
+add(x, y) === add(y, x);
+
+// identity : 5 + 0 = 5
+add(x, 0) === x;
+
+// distributive : 5 x (1 + 3) = (5 * 1) + (5 * 3)
+multiply(x, add(y, z)) === add(multiply(x, y), multiply(x, z));
